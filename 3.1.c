@@ -8,30 +8,19 @@
  * @brief считывает значение, введенное с клавиатуры с проверкой ввода
  * @return считанное значение
  */
-
 double getValue();
 
 /**
  * @brief проверяет,чтобы переменная была положительная
  * @param step значение проверяемой переменной
  */
-
 void checkStep(const double step);
-
-/**
- * @brief проверяет, принадлежит ли значение аргумента функции её области определения
- * @param x - аргумент функции
- * @return true, если аргумент принадлежит ООФ, else false
- */
-
-bool defineOOF(const double x);
 
 /**
  * @brief рассчитывает значение функции y по формуле
  * @param x значение
- * @return
+ * @return значение функции
  */
-
 double getY(const double x);
 
 int main()
@@ -43,17 +32,11 @@ int main()
 	printf("Введите значение шага: ");
 	double step = getValue();
 	checkStep(step);
+	
 	double x = start;
 	while (x < end + DBL_EPSILON)
 	{
-		if (defineOOF(x))
-		{
-			printf("x = %.2lf, y = %.4lf\n", x, getY(x));
-		}
-		else
-		{
-			printf("x = %.2lf, не принадлежит ООФ\n", x);
-		}
+		printf("x = %.2lf, y = %.4lf\n", x, getY(x));
 		x = x + step;
 	}
 	return 0;
@@ -77,11 +60,6 @@ void checkStep(const double step)
 		printf("Error, шаг должен быть положительным\n");
 		abort();
 	}
-}
-
-bool defineOOF(const double x)
-{
-	return x <= 0.85;
 }
 
 double getY(const double x)
