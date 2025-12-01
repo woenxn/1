@@ -23,6 +23,10 @@ void checkStep(const double step);
  */
 double getY(const double x);
 
+/**
+ * @brief точка входа в программу
+ * @return возвращает 0, если программа выполнена корректно, 1 - если некорректно.
+ */
 int main()
 {
 	printf("Введите исходное значение: ");
