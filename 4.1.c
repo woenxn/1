@@ -14,7 +14,7 @@ int Value(void);
  * @param message текстовое сообщение о необходимости ввода массива
  * @return размер массива (количество элементов)
  */
-size_t getSize(char* message);
+size_t getSize(const char* message);
 
 /**
  * @brief Считывает значения элементов массива
@@ -28,14 +28,14 @@ void fillArray(int* arr, const size_t size);
  * @param arr массив
  * @param size размер массива
  */
-void printArray(int* arr, const size_t size);
+void printArray(const int* arr, const size_t size);
 
 /**
  * @brief Вычисляет сумму отрицательных элементов массива
  * @param arr массив
  * @param size размер массива
  */
-void sumNegative(int* arr, const size_t size);
+void sumNegative(const int* arr, const size_t size);
 
 /**
  * @brief Заполняет массив случайными числами в пределах введённого пользователем диапазона
@@ -58,14 +58,14 @@ int* copyArray(const int* arr, const size_t size);
  * @param size размер массива
  * @return Возвращает 1, если функция выполнена корректно, 0 - если в массиве отсутствуют пары с разными знаками
  */
-int findLastDifferentSignPair(int* copyArr, const size_t size);
+int findLastDifferentSignPair(const int* copyArr, const size_t size);
 
 /**
  * @brief Считает количество положительных элементов, не превосходящих заданное число А
  * @param arr массив
  * @param size размер массива
  */
-void countPositiveLessThanA(int* arr, const size_t size);
+void countPositiveLessThanA(const int* arr, const size_t size);
 
 /**
  * @brief RANDOM - заполнение массива случайными числами в пределах введённого пользователем диапазона
