@@ -125,7 +125,7 @@ int Value(void)
     return value;
 }
 
-size_t getSize(char* message)
+size_t getSize(const char* message)
 {
     printf("%s", message);
     int value = Value();
@@ -146,7 +146,7 @@ void fillArray(int* arr, const size_t size)
     }
 }
 
-void printArray(int* arr, const size_t size)
+void printArray(const int* arr, const size_t size)
 {
     printf("Ваш массив:\n");
     for (size_t i = 0; i < size; i++)
@@ -156,7 +156,7 @@ void printArray(int* arr, const size_t size)
     printf("\n");
 }
 
-void sumNegative(int* arr, const size_t size)
+void sumNegative(const int* arr, const size_t size)
 {
     int result = 0;
     for (size_t i = 0; i < size; i++)
@@ -195,7 +195,7 @@ int* copyArray(const int* arr, const size_t size)
     return copyArr;
 }
 
-void countPositiveLessThanA(int* arr, const size_t size) {
+void countPositiveLessThanA(const int* arr, const size_t size) {
     printf("Введите число А: ");
     int A = Value();
     int count = 0;
@@ -208,7 +208,7 @@ void countPositiveLessThanA(int* arr, const size_t size) {
     printf("Количество положительных элементов не превышающих %d: %d.\n", A, count);
 }
 
-int findLastDifferentSignPair(int* copyArr, const size_t size) {
+int findLastDifferentSignPair(const int* copyArr, const size_t size) {
     if (size < 2) {
         printf("Размер массива слишком мал для поиска пар.\n");
         return 0;
