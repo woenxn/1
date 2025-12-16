@@ -17,6 +17,13 @@ int Value(void);
 size_t getSize(const char* message);
 
 /**
+ * @brief Создаёт и возвращает динамический массив заданного размера
+ * @param size размер массива
+ * @return указатель на созданный массив
+ */
+int* createArray(const size_t size);
+
+/**
  * @brief Считывает значения элементов массива
  * @param arr массив
  * @param size размер массива
@@ -80,12 +87,8 @@ enum {RANDOM = 1, MANUAL};
 int main(void)
 {
     size_t size = getSize("Введите размер массива:\n");
-    int* arr = malloc(size* sizeof(int));
-    if (arr == NULL)
-    {
-        fprintf(stderr,"Ошибка");
-        exit(1);
-    }
+    int* arr = createArray(size);
+    
     printf("Выберите способ заполнения массива:\n%d - случайными числами\n%d - вручную\n", RANDOM, MANUAL);
     int choice = Value();
     switch(choice)
@@ -135,6 +138,17 @@ size_t getSize(const char* message)
         exit(1);
     }
     return (size_t)value;
+}
+
+int* createArray(const size_t size)
+{
+    int* arr = malloc(size * sizeof(int));
+    if (arr == NULL)
+    {
+        fprintf(stderr, "Ошибка выделения памяти для массива\n");
+        exit(1);
+    }
+    return arr;
 }
 
 void fillArray(int* arr, const size_t size)
@@ -187,7 +201,7 @@ void fillRandom(int* arr, const size_t size)
 
 int* copyArray(const int* arr, const size_t size)
 {
-    int* copyArr = malloc(sizeof(int)*size);
+    int* copyArr = createArray(size);
     for (size_t i = 0; i<size; i++)
     {
         copyArr[i] = arr[i];
