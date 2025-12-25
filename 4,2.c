@@ -4,6 +4,12 @@
 #define scanf_s scanf  
 
 /**
+ * @brief Проверка выделения памяти
+ * @param ptr Указатель на выделенную память
+ */
+void checkMemoryAllocation(void* ptr);
+
+/**
  * @brief Считывает значение, введенное с клавиатуры с проверкой ввода
  * @return Считанное значение
  */
@@ -90,18 +96,12 @@ int main(void)
 {
     size_t size = getSize("Введите размер массива: ");
     int* arr = malloc(size * sizeof(int));
-    if (arr == NULL)
-    {
-        printf("Ошибка выделения памяти!\n");
-        exit(1);
-    }
-    
+    checkMemoryAllocation(arr);
     printf("Выберите способ заполнения массива:\n"
            "%d - случайными числами в диапазоне [-100;200]\n"
            "%d - вручную\n"
            "Введите нужный номер заполнения: ",
            RANDOM, MANUAL);
-
     int choice = getValue();
     switch (choice)
     {
@@ -116,7 +116,6 @@ int main(void)
             free(arr);
             exit(1);
     }
-    
     printf("\nИсходный массив:\n");
     printArray(arr, size);
     printf("\n1. Замена максимального по модулю отрицательного элемента нулем:\n");
@@ -133,11 +132,23 @@ int main(void)
     printf("\n2. Вставка числа К между соседними элементами с разными знаками:\n");
     insertKBetweenDifferentSigns(arr, size);
     printf("\n3. Формирование массива A по правилу:\n");
-    printf("Пожалуйста, введите значение k: ", size);
+    printf("Пожалуйста, введите значение k: ");
     fromDtoA(arr, size);
-    
     free(arr);
     return 0;
+}
+
+/**
+ * @brief Проверка выделения памяти
+ * @param ptr Указатель на выделенную память
+ */
+void checkMemoryAllocation(void* ptr)
+{
+    if (ptr == NULL)
+    {
+        printf("Ошибка выделения памяти!\n");
+        exit(1);
+    }
 }
 
 int getValue(void)
@@ -208,11 +219,8 @@ void fillRandom(int* arr, const size_t size)
 int* copyArray(const int* arr, const size_t size)
 {
     int* copyArr = malloc(sizeof(int) * size);
-    if (copyArr == NULL)
-    {
-        printf("Ошибка выделения памяти!\n");
-        exit(1);
-    }
+    checkMemoryAllocation(copyArr);
+    
     for (size_t i = 0; i < size; i++)
     {
         copyArr[i] = arr[i];
@@ -266,10 +274,8 @@ int insertKBetweenDifferentSigns(const int* copyArr, const size_t size)
         printf("Массив слишком мал для вставки между элементами.\n");
         return 0;
     }
-    
     printf("Введите значение K для вставки: ");
     int K = getValue();
-    
     size_t insertCount = 0;
     for (size_t i = 0; i < size - 1; i++)
     {
@@ -285,20 +291,13 @@ int insertKBetweenDifferentSigns(const int* copyArr, const size_t size)
         printf("Нет соседних элементов с разными знаками.\n");
         return 0;
     }
-    
     size_t newSize = size + insertCount;
     int* newArr = malloc(newSize * sizeof(int));
-    if (newArr == NULL)
-    {
-        printf("Ошибка выделения памяти!\n");
-        exit(1);
-    }
-    
+    checkMemoryAllocation(newArr);
     size_t j = 0;
     for (size_t i = 0; i < size; i++)
     {
         newArr[j++] = copyArr[i];
-        
         if (i < size - 1 && 
             ((copyArr[i] > 0 && copyArr[i + 1] < 0) || 
              (copyArr[i] < 0 && copyArr[i + 1] > 0)))
@@ -306,10 +305,8 @@ int insertKBetweenDifferentSigns(const int* copyArr, const size_t size)
             newArr[j++] = K;
         }
     }
-    
     printf("Новый массив после вставки K=%d:\n", K);
     printArray(newArr, newSize);
-    
     free(newArr);
     return 1;
 }
@@ -321,21 +318,14 @@ int fromDtoA(const int* copyArr, const size_t size)
         printf("Массив D пуст!\n");
         return 0;
     }
-    
     int k = getValue();
     if (k < 1 || k > (int)size)
     {
         printf("Error! k должно быть в диапазоне от 1 до %zu\n", size);
         return 0;
     }
-    
     int* A = malloc(size * sizeof(int));
-    if (A == NULL)
-    {
-        printf("Ошибка выделения памяти!\n");
-        exit(1);
-    }
-    
+    checkMemoryAllocation(A);
     for (size_t i = 0; i < size; i++)
     {
         size_t index = i + 1;
@@ -349,10 +339,8 @@ int fromDtoA(const int* copyArr, const size_t size)
             A[i] = copyArr[i] - 1;
         }
     }
-    
     printf("Массив A, сформированный по правилу (k=%d):\n", k);
     printArray(A, size);
-    
     free(A);
     return 1;
 }
