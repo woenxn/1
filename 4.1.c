@@ -17,6 +17,12 @@ int Value(void);
 size_t getSize(const char* message);
 
 /**
+ * @brief Проверяет успешность выделения памяти
+ * @param ptr указатель на выделенную память
+ */
+void checkMemoryAllocation(const void* ptr);
+
+/**
  * @brief Создаёт и возвращает динамический массив заданного размера
  * @param size размер массива
  * @return указатель на созданный массив
@@ -63,9 +69,8 @@ int* copyArray(const int* arr, const size_t size);
  * @brief Находит номер последней пары соседних элементов с разными знаками
  * @param copyArr копия массива
  * @param size размер массива
- * @return Возвращает 1, если функция выполнена корректно, 0 - если в массиве отсутствуют пары с разными знаками
  */
-int findLastDifferentSignPair(const int* copyArr, const size_t size);
+void findLastDifferentSignPair(const int* copyArr, const size_t size);
 
 /**
  * @brief Считает количество положительных элементов, не превосходящих заданное число А
@@ -140,14 +145,19 @@ size_t getSize(const char* message)
     return (size_t)value;
 }
 
+void checkMemoryAllocation(const void* ptr)
+{
+    if (ptr == NULL)
+    {
+        fprintf(stderr, "Ошибка выделения памяти\n");
+        exit(1);
+    }
+}
+
 int* createArray(const size_t size)
 {
     int* arr = malloc(size * sizeof(int));
-    if (arr == NULL)
-    {
-        fprintf(stderr, "Ошибка выделения памяти для массива\n");
-        exit(1);
-    }
+    checkMemoryAllocation(arr);
     return arr;
 }
 
@@ -222,10 +232,10 @@ void countPositiveLessThanA(const int* arr, const size_t size) {
     printf("Количество положительных элементов не превышающих %d: %d.\n", A, count);
 }
 
-int findLastDifferentSignPair(const int* copyArr, const size_t size) {
+void findLastDifferentSignPair(const int* copyArr, const size_t size) {
     if (size < 2) {
         printf("Размер массива слишком мал для поиска пар.\n");
-        return 0;
+        return;
     }
     
     int lastIndex = -1;
@@ -239,9 +249,7 @@ int findLastDifferentSignPair(const int* copyArr, const size_t size) {
     if (lastIndex != -1) {
         printf("Индекс последней пары с разными знаками: %d (элементы: %d и %d).\n", 
                lastIndex, copyArr[lastIndex], copyArr[lastIndex + 1]);
-        return 1;
     } else {
         printf("В массиве нет пар с разными знаками.\n");
-        return 0;
     }
 }
