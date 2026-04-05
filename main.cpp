@@ -1,16 +1,8 @@
 #include <iostream>
-#include "triangle.h"
+#include <string>
+#include "tringle.h"
 
-double getValue(const std::string& prompt) {
-    double val;
-    std::cout << prompt;
-    std::cin >> val;
-    if (std::cin.fail()) {
-        std::cout << "Ошибка ввода!\n";
-        exit(1);
-    }
-    return val;
-}
+double getValue(const std::string& prompt);
 
 int main() {
     double x1 = getValue("Введите x1: ");
@@ -27,4 +19,15 @@ int main() {
     std::cout << "Радиус описанной окружности: R = " << tri.getCircumscribedRadius() << std::endl;
 
     return 0;
+}
+
+double getValue(const std::string& prompt) {
+    double val = 0;
+    std::cout << prompt;
+    std::cin >> val;
+    if (std::cin.fail()) {
+        std::cout << "Ошибка ввода!\n";
+        exit(1);
+    }
+    return val;
 }
