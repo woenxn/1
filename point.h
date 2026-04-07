@@ -1,12 +1,42 @@
 #pragma once
-
-class Point {
+/**
+ * @brief Класс Точка
+ */
+class Point
+{
 private:
-    double x, y;
+    /**
+     * @brief Координата X
+     */
+    double x;
+    /**
+     * @brief Координата Y
+     */
+    double y;
+
 public:
+    /**
+     * @brief Конструктор точки
+     */
     Point(double x = 0, double y = 0);
+
+    /**
+     * @brief Получение координаты X
+     */
     double getX() const;
+
+    /**
+     * @brief Получение координаты Y
+     */
     double getY() const;
-    bool operator==(const Point& p) const;
-    bool operator!=(const Point& p) const;
+
+    /**
+     * @brief Проверка на равенство оператора
+     */
+    bool operator==(Point p) const;
+
+    /**
+     * @brief Проверка на неравенство оператора
+     */
+    bool operator!=(Point p) const;
 };
