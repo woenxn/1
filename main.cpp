@@ -2,8 +2,15 @@
 #include <string>
 #include "tringle.h"
 
+/**
+ * @brief Объявление функции считывания значения
+ */
 double getValue(const std::string& prompt);
 
+/**
+ * @brief Точка входа в программу
+ * @return 0, если программа выполнена корректно
+ */
 int main() {
     double x1 = getValue("Введите x1: ");
     double y1 = getValue("Введите y1: ");
@@ -21,6 +28,11 @@ int main() {
     return 0;
 }
 
+/**
+ * @brief Считывает значение, введенное с клавиатуры
+ * @param prompt - строка информации
+ * @return считанное значение
+ */
 double getValue(const std::string& prompt) {
     double val = 0;
     std::cout << prompt;
