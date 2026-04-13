@@ -49,7 +49,7 @@ public:
      * @param p2 - вторая точка
      * @param p3 - третья точка
      */
-    Triangle(Point p1, Point p2, Point p3);
+    Triangle(const Point p1, const Point p2, const Point p3);
 
     /**
      * @brief Получение длины стороны a(BC)
