@@ -24,7 +24,7 @@ public:
      * @param vertices вершины многоугольника
      * @param maxResolution максимальная координата
      */
-    Polygon(const std::vector<Point>& vertices, unsigned int maxResolution);
+    Polygon(const std::vector<Point>& vertices,const unsigned int maxResolution);
 
     /**
      * @brief Конструктор через массив пар координат
@@ -32,7 +32,7 @@ public:
      * @param count количество элементов в массиве (должно быть чётным >=6)
      * @param maxResolution максимальная координата
      */
-    Polygon(const unsigned int coords[], size_t count, unsigned int maxResolution);
+    Polygon(const unsigned int coords[],const size_t count,const unsigned int maxResolution);
 
     /**
      * @brief Статическая сериализация набора вершин в строку
@@ -65,7 +65,7 @@ public:
      * @param maxResolution максимальная координата
      * @return новый объект Polygon
      */
-    static Polygon readFromStream(std::istream& is, unsigned int maxResolution);
+    static Polygon readFromStream(std::istream& is,const unsigned int maxResolution);
 
     /**
      * @brief Оператор вывода многоугольника в поток
