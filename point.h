@@ -23,7 +23,7 @@ public:
      * @param maxResolution максимально допустимое значение координаты
      * @warning Если координаты превышают maxResolution, программа завершается с ошибкой
      */
-    Point(unsigned int x, unsigned int y, unsigned int maxResolution);
+    Point(const unsigned int x,const unsigned int y,const unsigned int maxResolution);
 
     /**
      * @brief Возвращает абсциссу
