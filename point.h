@@ -7,63 +7,50 @@
 class Point
 {
 private:
-    unsigned int x;
-    unsigned int y;
+    int x;
+    int y;
+
+    static unsigned int maxResolution;
 
 public:
     /**
-     * @brief Конструктор по умолчанию. Создаёт точку (0,0)
+     * @brief Конструктор по умолчанию, создаёт точку (0,0)
      */
     Point();
 
     /**
-     * @brief Конструктор с координатами и ограничением по разрешению экрана
+     * @brief Конструктор с координатами
      * @param x абсцисса
      * @param y ордината
-     * @param maxResolution максимально допустимое значение координаты
-     * @warning Если координаты превышают maxResolution, программа завершается с ошибкой
+     * @warning Если координаты выходят за пределы, программа завершается с ошибкой
      */
-    Point(const unsigned int x,const unsigned int y,const unsigned int maxResolution);
+    Point(int x, int y);
+
+    /**
+     * @brief Устанавливает разрешение экрана
+     * @param resolution максимальное допустимое значение
+     * @warning Должен быть вызван до создания любых точек
+     */
+    static void setMaxResolution(unsigned int resolution);
 
     /**
      * @brief Возвращает абсциссу
      * @return значение x
      */
-    unsigned int getX() const;
+    int getX() const;
 
     /**
      * @brief Возвращает ординату
      * @return значение y
      */
-    unsigned int getY() const;
+    int getY() const;
 
-    /**
-     * @brief Оператор сравнения на равенство
-     * @param other другая точка
-     * @return true, если координаты совпадают, иначе false
-     */
     bool operator==(const Point& other) const;
-
-    /**
-     * @brief Оператор сравнения на неравенство
-     * @param other другая точка
-     * @return true, если координаты не совпадают, иначе false
-     */
     bool operator!=(const Point& other) const;
 
-    /**
-     * @brief Оператор вывода точки в поток
-     * @param os выходной поток
-     * @param p точка
-     * @return поток os
-     */
-    friend std::ostream& operator<<(std::ostream& os, const Point& p);
+    Point operator+(int delta) const;
+    Point operator-(int delta) const;
 
-    /**
-     * @brief Оператор ввода точки из потока
-     * @param is входной поток
-     * @param p точка
-     * @return поток is
-     */
+    friend std::ostream& operator<<(std::ostream& os, const Point& p);
     friend std::istream& operator>>(std::istream& is, Point& p);
 };
