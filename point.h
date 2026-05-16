@@ -24,7 +24,7 @@ public:
      * @param y ордината
      * @warning Если координаты выходят за пределы, программа завершается с ошибкой
      */
-    Point(int x, int y);
+    Point(const int x,const int y);
 
     /**
      * @brief Устанавливает разрешение экрана
