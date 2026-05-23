@@ -4,17 +4,7 @@
 #include <cmath>
 #include <sstream>
 
-unsigned int Polygon::maxResolution = 0;
-
-void Polygon::setMaxResolution(unsigned int resolution)
-{
-    if (resolution == 0)
-    {
-        std::cout << "Ошибка. Разрешение экрана должно быть больше 0.\n";
-        exit(1);
-    }
-    maxResolution = resolution;
-}
+unsigned int Polygon::maxResolution = 1024;
 
 void Polygon::validate() const
 {
@@ -38,11 +28,6 @@ void Polygon::validate() const
 Polygon::Polygon(const std::vector<Point>& vertices)
     : vertices(vertices)
 {
-    if (maxResolution == 0)
-    {
-        std::cout << "Ошибка. Не установлено разрешение экрана.\n";
-        exit(1);
-    }
     for (const auto& p : vertices)
     {
         if (p.getX() < 0 || p.getY() < 0 || 
@@ -58,11 +43,6 @@ Polygon::Polygon(const std::vector<Point>& vertices)
 
 Polygon::Polygon(const int coords[], size_t count)
 {
-    if (maxResolution == 0)
-    {
-        std::cout << "Ошибка. Не установлено разрешение экрана (setMaxResolution).\n";
-        exit(1);
-    }
     if (count < 6 || count % 2 != 0)
     {
         std::cout << "Ошибка. Количество координат должно быть чётным и не менее 6.\n";
