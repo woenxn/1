@@ -11,7 +11,7 @@ class Polygon : public Figure
 private:
     std::vector<Point> vertices;
 
-    static unsigned int maxResolution; 
+    static unsigned int maxResolution;
 
     /**
      * @brief проверяет корректность многоугольника (не менее 3 вершин, ненулевые стороны)
@@ -31,13 +31,7 @@ public:
      * @param coords массив чисел (x1,y1,x2,y2,...)
      * @param count количество элементов в массиве (должно быть чётным >=6)
      */
-    Polygon(const int* coords,const size_t count);
-
-    /**
-     * @brief устанавливает разрешение экрана для всех многоугольников
-     * @param resolution максимальная координата
-     */
-    static void setMaxResolution(const unsigned int resolution);
+    Polygon(const int coords[], size_t count);
 
     /**
      * @brief статическая сериализация набора вершин в строку
@@ -65,14 +59,14 @@ public:
     void readFromStream(std::istream& is = std::cin) override;
 
     /**
-     * @brief Статический метод чтения многоугольника из потока.
+     * @brief статический метод чтения многоугольника из потока
      * @param is входной поток
-     * @return новый объект Polygon
+     * @return новый объект polygon
      */
     static Polygon readFromStream(std::istream& is);
 
     /**
-     * @brief Оператор вывода многоугольника в поток.
+     * @brief оператор вывода многоугольника в поток
      */
     friend std::ostream& operator<<(std::ostream& os, const Polygon& poly);
 };
