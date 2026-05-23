@@ -5,10 +5,6 @@
 
 int main()
 {
-    const unsigned int SCREEN_RES = 1024;
-    Point::setMaxResolution(SCREEN_RES);
-    Polygon::setMaxResolution(SCREEN_RES);
-
     std::vector<Point> points = {
         Point(100, 100),
         Point(200, 100),
