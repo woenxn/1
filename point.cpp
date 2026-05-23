@@ -2,17 +2,12 @@
 #include <iostream>
 #include <cstdlib>
 
-unsigned int Point::maxResolution = 0;
+unsigned int Point::maxResolution = 1024;
 
 Point::Point() : x(0), y(0) {}
 
 Point::Point(int x, int y)
 {
-    if (maxResolution == 0)
-    {
-        std::cout << "Ошибка. Не установлено разрешение экрана.\n";
-        exit(1);
-    }
     if (x < 0 || y < 0 || static_cast<unsigned int>(x) > maxResolution || static_cast<unsigned int>(y) > maxResolution)
     {
         std::cout << "Ошибка. Координаты точки выходят за пределы [0, " << maxResolution << "].\n";
@@ -20,16 +15,6 @@ Point::Point(int x, int y)
     }
     this->x = x;
     this->y = y;
-}
-
-void Point::setMaxResolution(unsigned int resolution)
-{
-    if (resolution == 0)
-    {
-        std::cout << "Ошибка. Разрешение экрана должно быть больше 0.\n";
-        exit(1);
-    }
-    maxResolution = resolution;
 }
 
 int Point::getX() const { return x; }
@@ -45,12 +30,12 @@ bool Point::operator!=(const Point& other) const
     return !(*this == other);
 }
 
-Point Point::operator+(int delta) const
+Point Point::operator+(const int delta) const
 {
     return Point(x + delta, y + delta);
 }
 
-Point Point::operator-(int delta) const
+Point Point::operator-(const int delta) const
 {
     return Point(x - delta, y - delta);
 }
