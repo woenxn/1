@@ -10,12 +10,6 @@ namespace PolygonTests
     TEST_CLASS(PointTests)
     {
     public:
-        TEST_CLASS_INITIALIZE(init)
-        {
-            Point::setMaxResolution(100);
-            Polygon::setMaxResolution(100);
-        }
-
         TEST_METHOD(Point_DefaultConstructor)
         {
             Point p;
@@ -60,12 +54,6 @@ namespace PolygonTests
     TEST_CLASS(PolygonTests)
     {
     public:
-        TEST_CLASS_INITIALIZE(init)
-        {
-            Point::setMaxResolution(100);
-            Polygon::setMaxResolution(100);
-        }
-
         TEST_METHOD(Polygon_ConstructFromVertices)
         {
             std::vector<Point> verts = { Point(0,0), Point(10,0), Point(10,10), Point(0,10) };
