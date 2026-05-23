@@ -2,45 +2,37 @@
 #include <iostream>
 
 /**
- * @brief Класс точки на плоскости с целыми неотрицательными координатами
- */
+ * @brief класс точки на плоскости с целыми неотрицательными координатами
 class Point
 {
 private:
-    int x;
+    int x; 
     int y;
 
     static unsigned int maxResolution;
 
 public:
     /**
-     * @brief Конструктор по умолчанию, создаёт точку (0,0)
+     * @brief конструктор по умолчанию, создаёт точку (0,0)
      */
     Point();
 
     /**
-     * @brief Конструктор с координатами
+     * @brief конструктор с координатами
      * @param x абсцисса
      * @param y ордината
-     * @warning Если координаты выходят за пределы, программа завершается с ошибкой
+     * @warning если координаты выходят за пределы, программа завершается с ошибкой
      */
-    Point(const int x,const int y);
+    Point(int x, int y);
 
     /**
-     * @brief Устанавливает разрешение экрана
-     * @param resolution максимальное допустимое значение
-     * @warning Должен быть вызван до создания любых точек
-     */
-    static void setMaxResolution(unsigned int resolution);
-
-    /**
-     * @brief Возвращает абсциссу
+     * @brief возвращает абсциссу
      * @return значение x
      */
     int getX() const;
 
     /**
-     * @brief Возвращает ординату
+     * @brief возвращает ординату
      * @return значение y
      */
     int getY() const;
@@ -48,8 +40,8 @@ public:
     bool operator==(const Point& other) const;
     bool operator!=(const Point& other) const;
 
-    Point operator+(int delta) const;
-    Point operator-(int delta) const;
+    Point operator+(const int delta) const;
+    Point operator-(const int delta) const;
 
     friend std::ostream& operator<<(std::ostream& os, const Point& p);
     friend std::istream& operator>>(std::istream& is, Point& p);
