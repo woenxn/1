@@ -1,5 +1,5 @@
 #include "deque.h"
-#include <sstream>
+#include <string>
 
 Deque::Deque() : m_elements(nullptr), m_count(0) {}
 
@@ -43,14 +43,14 @@ std::string Deque::to_string() const
     if (is_empty())
         return "Empty";
 
-    std::stringstream ss;
+    std::string result;
     for (std::size_t i = 0; i < m_count; ++i)
     {
-        ss << m_elements[i];
+        result += std::to_string(m_elements[i]);
         if (i < m_count - 1)
-            ss << " ";
+            result += " ";
     }
-    return ss.str();
+    return result;
 }
 
 std::size_t Deque::get_size() const
@@ -185,10 +185,4 @@ Deque& Deque::operator=(Deque&& other)
         other.m_count = 0;
     }
     return *this;
-}
-
-std::ostream& operator<<(std::ostream& os, const Deque& d)
-{
-    os << d.to_string();
-    return os;
 }
