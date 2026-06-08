@@ -6,7 +6,7 @@ unsigned int Point::maxResolution = 1024;
 
 Point::Point() : x(0), y(0) {}
 
-Point::Point(int x, int y)
+Point::Point(const int x,const int y)
 {
     if (x < 0 || y < 0 || static_cast<unsigned int>(x) > maxResolution || static_cast<unsigned int>(y) > maxResolution)
     {
