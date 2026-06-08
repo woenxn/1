@@ -3,28 +3,31 @@
 
 Deque::Deque() : m_elements(nullptr), m_count(0) {}
 
-Deque::Deque(const std::initializer_list<int> items) : m_elements(nullptr), m_count(items.size())
+Deque::Deque(const std::initializer_list<int> items)
+    : m_elements(nullptr), m_count(items.size())
 {
     if (m_count > 0)
     {
         m_elements = new int[m_count];
-        size_t idx = 0;
+        std::size_t idx = 0;
         for (const int& val : items)
             m_elements[idx++] = val;
     }
 }
 
-Deque::Deque(const Deque& other) : m_elements(nullptr), m_count(other.m_count)
+Deque::Deque(const Deque& other)
+    : m_elements(nullptr), m_count(other.m_count)
 {
     if (m_count > 0)
     {
         m_elements = new int[m_count];
-        for (size_t i = 0; i < m_count; ++i)
+        for (std::size_t i = 0; i < m_count; ++i)
             m_elements[i] = other.m_elements[i];
     }
 }
 
-Deque::Deque(Deque&& other) : m_elements(other.m_elements), m_count(other.m_count)
+Deque::Deque(Deque&& other)
+    : m_elements(other.m_elements), m_count(other.m_count)
 {
     other.m_elements = nullptr;
     other.m_count = 0;
@@ -41,7 +44,7 @@ std::string Deque::to_string() const
         return "Empty";
 
     std::stringstream ss;
-    for (size_t i = 0; i < m_count; ++i)
+    for (std::size_t i = 0; i < m_count; ++i)
     {
         ss << m_elements[i];
         if (i < m_count - 1)
@@ -50,7 +53,7 @@ std::string Deque::to_string() const
     return ss.str();
 }
 
-size_t Deque::get_size() const
+std::size_t Deque::get_size() const
 {
     return m_count;
 }
@@ -63,7 +66,7 @@ bool Deque::is_empty() const
 void Deque::push_front(int value)
 {
     int* temp = new int[m_count + 1];
-    for (size_t i = 0; i < m_count; ++i)
+    for (std::size_t i = 0; i < m_count; ++i)
         temp[i + 1] = m_elements[i];
     temp[0] = value;
     delete[] m_elements;
@@ -74,7 +77,7 @@ void Deque::push_front(int value)
 void Deque::push_back(int value)
 {
     int* temp = new int[m_count + 1];
-    for (size_t i = 0; i < m_count; ++i)
+    for (std::size_t i = 0; i < m_count; ++i)
         temp[i] = m_elements[i];
     temp[m_count] = value;
     delete[] m_elements;
@@ -97,7 +100,7 @@ int Deque::pop_front()
     else
     {
         int* temp = new int[m_count - 1];
-        for (size_t i = 1; i < m_count; ++i)
+        for (std::size_t i = 1; i < m_count; ++i)
             temp[i - 1] = m_elements[i];
         delete[] m_elements;
         m_elements = temp;
@@ -121,7 +124,7 @@ int Deque::pop_back()
     else
     {
         int* temp = new int[m_count - 1];
-        for (size_t i = 0; i < m_count - 1; ++i)
+        for (std::size_t i = 0; i < m_count - 1; ++i)
             temp[i] = m_elements[i];
         delete[] m_elements;
         m_elements = temp;
@@ -158,20 +161,6 @@ const int& Deque::back() const
     return m_elements[m_count - 1];
 }
 
-int& Deque::operator[](size_t index)
-{
-    if (index >= m_count)
-        throw std::out_of_range("Index out of range");
-    return m_elements[index];
-}
-
-const int& Deque::operator[](size_t index) const
-{
-    if (index >= m_count)
-        throw std::out_of_range("Index out of range");
-    return m_elements[index];
-}
-
 Deque& Deque::operator=(const Deque& other)
 {
     if (this != &other)
@@ -179,7 +168,7 @@ Deque& Deque::operator=(const Deque& other)
         delete[] m_elements;
         m_count = other.m_count;
         m_elements = (m_count > 0) ? new int[m_count] : nullptr;
-        for (size_t i = 0; i < m_count; ++i)
+        for (std::size_t i = 0; i < m_count; ++i)
             m_elements[i] = other.m_elements[i];
     }
     return *this;
@@ -202,12 +191,4 @@ std::ostream& operator<<(std::ostream& os, const Deque& d)
 {
     os << d.to_string();
     return os;
-}
-
-std::istream& operator>>(std::istream& is, Deque& d)
-{
-    int value;
-    if (is >> value)
-        d.push_back(value);
-    return is;
 }
