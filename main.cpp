@@ -6,7 +6,9 @@
 using namespace std;
 
 enum Actions
-{PUSH_FRONT = 1, PUSH_BACK, POP_FRONT, POP_BACK, FRONT, BACK, PRINT};
+{
+    PUSH_FRONT = 1, PUSH_BACK, POP_FRONT, POP_BACK, FRONT ,BACK, PRINT
+};
 
 void ERROR(const string& text)
 {
@@ -35,7 +37,7 @@ int main()
 
     if (n > 0)
     {
-        cout << "Введите " << n << " элементов дека: " << endl;
+        cout << "Введите " << n << " элементов дека (через пробел или Enter): " << endl;
         for (size_t i = 0; i < static_cast<size_t>(n); ++i)
         {
             int val = get_choice();
@@ -112,7 +114,7 @@ int main()
     }
     catch (const exception& e)
     {
-        cout << "Ошибка " << e.what() << endl;
+        cout << "Ошибка! " << e.what() << endl;
     }
 
     return 0;
