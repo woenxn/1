@@ -4,8 +4,6 @@
 #include <cmath>
 #include <sstream>
 
-unsigned int Polygon::maxResolution = 1024;
-
 void Polygon::validate() const
 {
     if (vertices.size() < 3)
@@ -28,11 +26,12 @@ void Polygon::validate() const
 Polygon::Polygon(const std::vector<Point>& vertices)
     : vertices(vertices)
 {
+    unsigned int maxRes = Point::getMaxResolution();
     for (const auto& p : vertices)
     {
-        if (p.getX() < 0 || p.getY() < 0 || 
-            static_cast<unsigned int>(p.getX()) > maxResolution ||
-            static_cast<unsigned int>(p.getY()) > maxResolution)
+        if (p.getX() < 0 || p.getY() < 0 ||
+            static_cast<unsigned int>(p.getX()) > maxRes ||
+            static_cast<unsigned int>(p.getY()) > maxRes)
         {
             std::cout << "Ошибка. Вершина выходит за пределы разрешения экрана.\n";
             exit(1);
@@ -49,8 +48,16 @@ Polygon::Polygon(const int coords[], size_t count)
         exit(1);
     }
     std::vector<Point> temp;
+    unsigned int maxRes = Point::getMaxResolution();
     for (size_t i = 0; i < count; i += 2)
     {
+        if (coords[i] < 0 || coords[i+1] < 0 ||
+            static_cast<unsigned int>(coords[i]) > maxRes ||
+            static_cast<unsigned int>(coords[i+1]) > maxRes)
+        {
+            std::cout << "Ошибка. Координата выходит за пределы разрешения экрана.\n";
+            exit(1);
+        }
         temp.push_back(Point(coords[i], coords[i+1]));
     }
     vertices = temp;
