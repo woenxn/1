@@ -2,7 +2,7 @@
 #include <initializer_list>
 #include <string>
 #include <stdexcept>
-#include <cstddef> 
+#include <cstddef>
 
 class Deque
 {
@@ -21,8 +21,8 @@ public:
     std::size_t get_size() const;
     bool is_empty() const;
 
-    void push_front(const int value);
-    void push_back(const int value);
+    void push_front(int value);
+    void push_back(int value);
     int pop_front();
     int pop_back();
     int& front();
@@ -32,6 +32,4 @@ public:
 
     Deque& operator=(const Deque& other);
     Deque& operator=(Deque&& other);
-
-    friend std::ostream& operator<<(std::ostream& os, const Deque& d);
 };
