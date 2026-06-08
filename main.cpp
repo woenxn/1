@@ -5,6 +5,8 @@
 
 int main()
 {
+    Point::setMaxResolution(1920);
+
     std::vector<Point> points = {
         Point(100, 100),
         Point(200, 100),
