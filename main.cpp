@@ -7,7 +7,7 @@ using namespace std;
 
 enum Actions
 {
-    PUSH_FRONT = 1, PUSH_BACK, POP_FRONT, POP_BACK, FRONT ,BACK, PRINT
+    PUSH_FRONT = 1, PUSH_BACK, POP_FRONT, POP_BACK, FRONT, BACK, PRINT
 };
 
 void ERROR(const string& text)
@@ -37,7 +37,7 @@ int main()
 
     if (n > 0)
     {
-        cout << "Введите " << n << " элементов дека (через пробел или Enter): " << endl;
+        cout << "Введите " << n << " элементов дека: " << endl;
         for (size_t i = 0; i < static_cast<size_t>(n); ++i)
         {
             int val = get_choice();
@@ -45,7 +45,7 @@ int main()
         }
     }
 
-    cout << "Изначальный дек: " << collection << endl;
+    cout << "Изначальный дек: " << collection.to_string() << endl;
 
     cout << "Выберите действие с деком:" << endl
          << PUSH_FRONT << " - Добавить в начало" << endl
@@ -68,7 +68,7 @@ int main()
             cout << "Введите значение для добавления в начало: ";
             int val = get_choice();
             collection.push_front(val);
-            cout << "После push_front: " << collection << endl;
+            cout << "После push_front: " << collection.to_string() << endl;
             break;
         }
         case PUSH_BACK:
@@ -76,21 +76,21 @@ int main()
             cout << "Введите значение для добавления в конец: ";
             int val = get_choice();
             collection.push_back(val);
-            cout << "После push_back: " << collection << endl;
+            cout << "После push_back: " << collection.to_string() << endl;
             break;
         }
         case POP_FRONT:
         {
             int val = collection.pop_front();
             cout << "Удалено из начала: " << val << endl;
-            cout << "Текущий дек: " << collection << endl;
+            cout << "Текущий дек: " << collection.to_string() << endl;
             break;
         }
         case POP_BACK:
         {
             int val = collection.pop_back();
             cout << "Удалено из конца: " << val << endl;
-            cout << "Текущий дек: " << collection << endl;
+            cout << "Текущий дек: " << collection.to_string() << endl;
             break;
         }
         case FRONT:
@@ -105,7 +105,7 @@ int main()
         }
         case PRINT:
         {
-            cout << "Дек: " << collection << endl;
+            cout << "Дек: " << collection.to_string() << endl;
             break;
         }
         default:
