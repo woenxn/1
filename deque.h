@@ -20,8 +20,8 @@ public:
     size_t get_size() const;
     bool is_empty() const;
 
-    void push_front(int value);
-    void push_back(int value);
+    void push_front(const int value);
+    void push_back(const int value);
     int pop_front();
     int pop_back();
     int& front();
@@ -29,8 +29,8 @@ public:
     int& back();
     const int& back() const;
 
-    int& operator[](size_t index);
-    const int& operator[](size_t index) const;
+    int& operator[](const size_t index);
+    const int& operator[](const size_t index) const;
 
     Deque& operator=(const Deque& other);
     Deque& operator=(Deque&& other);
