@@ -2,13 +2,29 @@
 #include <iostream>
 #include <cstdlib>
 
-unsigned int Point::maxResolution = 1024;
+unsigned int Point::maxResolution = 1024; 
+
+void Point::setMaxResolution(unsigned int res)
+{
+    if (res == 0) {
+        std::cout << "Ошибка: разрешение должно быть больше 0.\n";
+        exit(1);
+    }
+    maxResolution = res;
+}
+
+unsigned int Point::getMaxResolution()
+{
+    return maxResolution;
+}
 
 Point::Point() : x(0), y(0) {}
 
-Point::Point(const int x,const int y)
+Point::Point(const int x, const int y)
 {
-    if (x < 0 || y < 0 || static_cast<unsigned int>(x) > maxResolution || static_cast<unsigned int>(y) > maxResolution)
+    if (x < 0 || y < 0 ||
+        static_cast<unsigned int>(x) > maxResolution ||
+        static_cast<unsigned int>(y) > maxResolution)
     {
         std::cout << "Ошибка. Координаты точки выходят за пределы [0, " << maxResolution << "].\n";
         exit(1);
@@ -30,14 +46,19 @@ bool Point::operator!=(const Point& other) const
     return !(*this == other);
 }
 
-Point Point::operator+(const int delta) const
+Point Point::operator+(int delta) const
 {
     return Point(x + delta, y + delta);
 }
 
-Point Point::operator-(const int delta) const
+Point Point::operator-(int delta) const
 {
     return Point(x - delta, y - delta);
+}
+
+Point operator+(int delta, const Point& p)
+{
+    return Point(p.x + delta, p.y + delta);
 }
 
 std::ostream& operator<<(std::ostream& os, const Point& p)
