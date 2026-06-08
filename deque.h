@@ -2,12 +2,13 @@
 #include <initializer_list>
 #include <string>
 #include <stdexcept>
+#include <cstddef> 
 
 class Deque
 {
 private:
     int* m_elements;
-    size_t m_count; 
+    std::size_t m_count;
 
 public:
     Deque();
@@ -17,7 +18,7 @@ public:
     ~Deque();
 
     std::string to_string() const;
-    size_t get_size() const;
+    std::size_t get_size() const;
     bool is_empty() const;
 
     void push_front(const int value);
@@ -29,12 +30,8 @@ public:
     int& back();
     const int& back() const;
 
-    int& operator[](const size_t index);
-    const int& operator[](const size_t index) const;
-
     Deque& operator=(const Deque& other);
     Deque& operator=(Deque&& other);
 
     friend std::ostream& operator<<(std::ostream& os, const Deque& d);
-    friend std::istream& operator>>(std::istream& is, Deque& d);
 };
