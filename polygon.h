@@ -11,8 +11,6 @@ class Polygon : public Figure
 private:
     std::vector<Point> vertices;
 
-    static unsigned int maxResolution;
-
     /**
      * @brief проверяет корректность многоугольника (не менее 3 вершин, ненулевые стороны)
      * @warning при нарушении программа завершается с ошибкой
@@ -31,7 +29,7 @@ public:
      * @param coords массив чисел (x1,y1,x2,y2,...)
      * @param count количество элементов в массиве (должно быть чётным >=6)
      */
-    Polygon(const int coords[],const size_t count);
+    Polygon(const int coords[], size_t count);
 
     /**
      * @brief статическая сериализация набора вершин в строку
