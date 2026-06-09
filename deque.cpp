@@ -63,7 +63,7 @@ bool Deque::is_empty() const
     return m_count == 0;
 }
 
-void Deque::push_front(int value)
+void Deque::push_front(const int value)
 {
     int* temp = new int[m_count + 1];
     for (std::size_t i = 0; i < m_count; ++i)
@@ -74,7 +74,7 @@ void Deque::push_front(int value)
     ++m_count;
 }
 
-void Deque::push_back(int value)
+void Deque::push_back(const int value)
 {
     int* temp = new int[m_count + 1];
     for (std::size_t i = 0; i < m_count; ++i)
