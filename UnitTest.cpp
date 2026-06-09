@@ -58,7 +58,7 @@ namespace PolygonTests
         {
             std::vector<Point> verts = { Point(0,0), Point(10,0), Point(10,10), Point(0,10) };
             Polygon poly(verts);
-            std::string expected = "Многоугольник: (0, 0) (10, 0) (10, 10) (0, 10) ";
+            std::string expected = "Polygon: (0, 0) (10, 0) (10, 10) (0, 10) ";
             Assert::AreEqual(expected, poly.ToString());
         }
 
@@ -66,30 +66,30 @@ namespace PolygonTests
         {
             int coords[] = { 0,0, 10,0, 10,10, 0,10 };
             Polygon poly(coords, 8);
-            Assert::AreEqual(std::string("Многоугольник: (0, 0) (10, 0) (10, 10) (0, 10) "), poly.ToString());
+            Assert::AreEqual(std::string("Polygon: (0, 0) (10, 0) (10, 10) (0, 10) "), poly.ToString());
         }
 
         TEST_METHOD(Polygon_StaticToString)
         {
             std::vector<Point> verts = { Point(1,2), Point(3,4) };
-            std::string expected = "Многоугольник: (1, 2) (3, 4) ";
+            std::string expected = "Polygon: (1, 2) (3, 4) ";
             Assert::AreEqual(expected, Polygon::ToString(verts));
         }
 
         TEST_METHOD(Polygon_ReadFromStream)
         {
             std::istringstream iss("3\n0 0\n10 0\n0 10\n");
-            Polygon poly = Polygon::readFromStream(iss);
-            Assert::AreEqual(std::string("Многоугольник: (0, 0) (10, 0) (0, 10) "), poly.ToString());
+            Polygon poly = Polygon::readFrom(iss);
+            Assert::AreEqual(std::string("Polygon: (0, 0) (10, 0) (0, 10) "), poly.ToString());
         }
 
         TEST_METHOD(Polygon_OperatorOutput)
         {
-            std::vector<Point> verts = { Point(1,1), Point(2,2) };
+            std::vector<Point> verts = { Point(1,1), Point(2,2), Point(3,1) };
             Polygon poly(verts);
             std::ostringstream oss;
             oss << poly;
-            Assert::AreEqual(std::string("Многоугольник: (1, 1) (2, 2) "), oss.str());
+            Assert::AreEqual(std::string("Polygon: (1, 1) (2, 2) (3, 1) "), oss.str());
         }
     };
 }
