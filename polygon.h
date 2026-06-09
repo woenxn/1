@@ -61,7 +61,7 @@ public:
      * @param is входной поток
      * @return новый объект polygon
      */
-    static Polygon readFromStream(std::istream& is);
+    static Polygon readFrom(std::istream& is);
 
     /**
      * @brief оператор вывода многоугольника в поток
