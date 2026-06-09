@@ -25,9 +25,9 @@ int main()
     for (const auto& fig : figures)
         fig->draw();
 
-    std::cout << "\nВведите многоугольник (количество вершин, затем координаты):\n";
-    Polygon p = Polygon::readFromStream(std::cin);
-    std::cout << "Прочитан: " << p << std::endl;
+    std::cout << "\nEnter a polygon (number of vertices, then coordinates):\n";
+    Polygon p = Polygon::readFrom(std::cin);
+    std::cout << "Read it: " << p << std::endl;
 
     return 0;
 }
