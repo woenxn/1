@@ -50,8 +50,8 @@ public:
     bool operator==(const Point& other) const;
     bool operator!=(const Point& other) const;
 
-    Point operator+(int delta) const;
-    Point operator-(int delta) const;
+    Point operator+(const int delta) const;
+    Point operator-(const int delta) const;
 
     friend Point operator+(int delta, const Point& p);
 
