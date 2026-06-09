@@ -7,7 +7,7 @@ unsigned int Point::maxResolution = 1024;
 void Point::setMaxResolution(unsigned int res)
 {
     if (res == 0) {
-        std::cout << "Ошибка: разрешение должно быть больше 0.\n";
+        std::cout << "Error: The resolution must be greater than 0.\n";
         exit(1);
     }
     maxResolution = res;
@@ -26,7 +26,7 @@ Point::Point(const int x, const int y)
         static_cast<unsigned int>(x) > maxResolution ||
         static_cast<unsigned int>(y) > maxResolution)
     {
-        std::cout << "Ошибка. Координаты точки выходят за пределы [0, " << maxResolution << "].\n";
+        std::cout << "Error. The point coordinates are out of bounds[0, " << maxResolution << "].\n";
         exit(1);
     }
     this->x = x;
