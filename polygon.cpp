@@ -8,7 +8,7 @@ void Polygon::validate() const
 {
     if (vertices.size() < 3)
     {
-        std::cout << "Ошибка. Многоугольник должен иметь не менее 3 вершин.\n";
+        std::cout << "Error. A polygon must have at least 3 vertices.\n";
         exit(1);
     }
     for (size_t i = 0; i < vertices.size(); ++i)
@@ -17,7 +17,7 @@ void Polygon::validate() const
         const Point& p2 = vertices[(i + 1) % vertices.size()];
         if (p1 == p2)
         {
-            std::cout << "Ошибка. Сторона многоугольника имеет нулевую длину.\n";
+            std::cout << "Error. The side of the polygon has a length of zero.\n";
             exit(1);
         }
     }
@@ -33,7 +33,7 @@ Polygon::Polygon(const std::vector<Point>& vertices)
             static_cast<unsigned int>(p.getX()) > maxRes ||
             static_cast<unsigned int>(p.getY()) > maxRes)
         {
-            std::cout << "Ошибка. Вершина выходит за пределы разрешения экрана.\n";
+            std::cout << "Error. The vertex is outside the screen resolution.\n";
             exit(1);
         }
     }
@@ -44,7 +44,7 @@ Polygon::Polygon(const int coords[], size_t count)
 {
     if (count < 6 || count % 2 != 0)
     {
-        std::cout << "Ошибка. Количество координат должно быть чётным и не менее 6.\n";
+        std::cout << "Error. The number of coordinates must be even and at least 6.\n";
         exit(1);
     }
     std::vector<Point> temp;
@@ -55,7 +55,7 @@ Polygon::Polygon(const int coords[], size_t count)
             static_cast<unsigned int>(coords[i]) > maxRes ||
             static_cast<unsigned int>(coords[i+1]) > maxRes)
         {
-            std::cout << "Ошибка. Координата выходит за пределы разрешения экрана.\n";
+            std::cout << "Error. The coordinate is outside the screen resolution.\n";
             exit(1);
         }
         temp.push_back(Point(coords[i], coords[i+1]));
@@ -67,7 +67,7 @@ Polygon::Polygon(const int coords[], size_t count)
 std::string Polygon::ToString(const std::vector<Point>& vertices)
 {
     std::ostringstream oss;
-    oss << "Многоугольник: ";
+    oss << "Polygon: ";
     for (const auto& p : vertices)
         oss << p << " ";
     return oss.str();
@@ -83,13 +83,13 @@ void Polygon::draw(std::ostream& os) const
     os << ToString() << std::endl;
 }
 
-Polygon Polygon::readFromStream(std::istream& is)
+Polygon Polygon::readFrom(std::istream& is)
 {
     size_t vertexCount;
     is >> vertexCount;
     if (vertexCount < 3)
     {
-        std::cout << "Ошибка. Количество вершин должно быть не менее 3.\n";
+        std::cout << "Error. The number of vertices must be at least 3.\n";
         exit(1);
     }
     std::vector<Point> verts;
@@ -104,7 +104,7 @@ Polygon Polygon::readFromStream(std::istream& is)
 
 void Polygon::readFromStream(std::istream& is)
 {
-    *this = readFromStream(is);
+    *this = readFrom(is);
 }
 
 std::ostream& operator<<(std::ostream& os, const Polygon& poly)
