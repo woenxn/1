@@ -4,13 +4,13 @@
 
 unsigned int Point::maxResolution = 1024; 
 
-void Point::setMaxResolution(unsigned int res)
+void Point::setMaxResolution(const int res)
 {
     if (res == 0) {
         std::cout << "Error: The resolution must be greater than 0.\n";
         exit(1);
     }
-    maxResolution = res;
+    maxResolution = static_cast<unsigned int>(res);
 }
 
 unsigned int Point::getMaxResolution()
