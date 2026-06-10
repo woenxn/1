@@ -30,7 +30,7 @@ public:
      * @brief задаёт максимальное разрешение экрана
      * @param res новое значение разрешения (должно быть > 0)
      */
-    static void setMaxResolution(unsigned int res);
+    static void setMaxResolution(const int res);
 
     /**
      * @brief возвращает текущее максимальное разрешение
@@ -53,7 +53,7 @@ public:
     Point operator+(const int delta) const;
     Point operator-(const int delta) const;
 
-    friend Point operator+(int delta, const Point& p);
+    friend Point operator+(const int delta, const Point& p);
 
     friend std::ostream& operator<<(std::ostream& os, const Point& p);
     friend std::istream& operator>>(std::istream& is, Point& p);
