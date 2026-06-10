@@ -40,7 +40,7 @@ Polygon::Polygon(const std::vector<Point>& vertices)
     validate();
 }
 
-Polygon::Polygon(const int coords[], size_t count)
+Polygon::Polygon(const int coords[],const size_t count)
 {
     if (count < 6 || count % 2 != 0)
     {
