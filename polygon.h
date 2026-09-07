@@ -62,9 +62,4 @@ public:
      * @return новый объект polygon
      */
     static Polygon readFrom(std::istream& is);
-
-    /**
-     * @brief оператор вывода многоугольника в поток
-     */
-    friend std::ostream& operator<<(std::ostream& os, const Polygon& poly);
 };
