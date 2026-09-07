@@ -47,14 +47,64 @@ public:
      */
     int getY() const;
 
+    /**
+     * @brief оператор сравнения на равенство
+     * @param other другая точкао
+     * @return true, если координаты обеих точек совпадают
+     */
+
     bool operator==(const Point& other) const;
+
+    /**
+    * @brief оператор сравнения на неравенство
+    * @param other другая точка
+    * @return true, если координаты точек не совпадают
+    */
+
     bool operator!=(const Point& other) const;
 
+    /**
+    * @brief прибавляет целое число к обеим координатам
+    * @param delta величина сложения
+    * @return новая точка с координатами (x + delta, y + delta)
+    * @warning если результат выходит за пределы разрешения, программа завершается с ошибкой
+    */
+
     Point operator+(const int delta) const;
+
+    /**
+    * @brief вычитает целое число из обеих координат
+    * @param delta Величина вычитания
+    * @return новая точка с координатами (x - delta, y - delta)
+    * @warning если результат выходит за пределы разрешения, программа завершается с ошибкой
+    */
+
     Point operator-(const int delta) const;
+
+    /**
+     * @brief дружественная функция для симметричного сложения int + Point
+     * @param delta целое число
+     * @param p точка
+     * @return новая точка с координатами
+     */
 
     friend Point operator+(const int delta, const Point& p);
 
+    /**
+     * @brief дружественный оператор вывода точки в поток
+     * @param os выходной поток
+     * @param p точка для вывода
+     * @return ссылка на поток os
+     */
+
     friend std::ostream& operator<<(std::ostream& os, const Point& p);
+
+    /**
+     * @brief дружественный оператор ввода точки из потока
+     * @param is входной поток
+     * @param p точка для заполненияя
+     * @return ссылка на поток is
+     */
+
     friend std::istream& operator>>(std::istream& is, Point& p);
 };
