@@ -30,4 +30,13 @@ public:
      * @return строковое представление фигуры
      */
     virtual std::string ToString() const = 0;
+
+    /**
+    * @brief оператор вывода фигуры в поток 
+    * @param os выходной поток
+    * @param fig фигура
+    * @return ссылка на поток
+    */
+
+    friend std::ostream& operator<<(std::ostream& os, const Figure& fig);
 };
