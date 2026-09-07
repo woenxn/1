@@ -106,9 +106,3 @@ void Polygon::readFromStream(std::istream& is)
 {
     *this = readFrom(is);
 }
-
-std::ostream& operator<<(std::ostream& os, const Polygon& poly)
-{
-    os << poly.ToString();
-    return os;
-}
