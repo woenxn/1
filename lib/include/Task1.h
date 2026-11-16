@@ -20,6 +20,11 @@ namespace miit::algebra {
          * @brief Выполняет решение задачи 1.
          */
         void solve() override;
+
+        /**
+         * @brief Заполняет матрицу генератором (переопределение метода базового класса).
+         */
+        void fill() override;
     };
 
 }
