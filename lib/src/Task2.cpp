@@ -21,6 +21,10 @@ namespace miit::algebra {
         return false;
     }
 
+    void Task2::fill() {
+        Exercise::fill();
+    }
+
     void Task2::solve() {
         const std::size_t originalRows = matrix.getRows();
         const std::size_t cols = matrix.getCols();
