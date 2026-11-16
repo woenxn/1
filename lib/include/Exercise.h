@@ -11,6 +11,7 @@ namespace miit::algebra {
     class Exercise {
     protected:
         Matrix<int>& matrix;
+        /// Ссылка на абстрактный Generator
         Generator& generator;
 
     public:
@@ -24,14 +25,15 @@ namespace miit::algebra {
         virtual ~Exercise() = default;
 
         /**
-         * @brief Чисто виртуальный метод для решения задачи. Должен быть переопределен в наследниках.
+         * @brief Чисто виртуальный метод для решения задачи
          */
         virtual void solve() = 0;
 
         /**
          * @brief Заполняет матрицу с помощью связанного генератора.
+         * Виртуальный метод: может быть переопределен в производных классах.
          */
-        void fill();
+        virtual void fill();
     };
 
 }
