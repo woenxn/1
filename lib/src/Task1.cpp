@@ -6,6 +6,10 @@ namespace miit::algebra {
         : Exercise(matrix, generator) {
     }
 
+    void Task1::fill() {
+        Exercise::fill();
+    }
+
     void Task1::solve() {
         const std::size_t rows = matrix.getRows();
         const std::size_t cols = matrix.getCols();
