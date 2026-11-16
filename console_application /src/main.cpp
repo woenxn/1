@@ -11,12 +11,54 @@
 
 using namespace miit::algebra;
 
+namespace {
+
+    /**
+     * @brief Способы заполнения матрицы.
+     */
+    enum class FillType {
+        Random = 1,
+        Keyboard,
+        Zero,
+        Constant
+    };
+
+    /**
+     * @brief Создает генератор по выбранному способу заполнения.
+     * @param type Выбранный способ заполнения.
+     * @return Умный указатель на созданный генератор или nullptr, если способ неизвестен.
+     */
+    std::unique_ptr<Generator> createGenerator(const FillType type) {
+        switch (type) {
+        case FillType::Random: {
+            int min = 0;
+            int max = 0;
+            std::cout << "Enter min and max: ";
+            std::cin >> min >> max;
+            return std::make_unique<RandomGenerator>(min, max);
+        }
+        case FillType::Keyboard:
+            return std::make_unique<IStreamGenerator>(std::cin);
+        case FillType::Zero:
+            return std::make_unique<ZeroGenerator>();
+        case FillType::Constant: {
+            int value = 0;
+            std::cout << "Enter number: ";
+            std::cin >> value;
+            return std::make_unique<ConstantGenerator>(value);
+        }
+        }
+
+        return nullptr;
+    }
+
+}
+
 /**
  * @brief Точка входа в демонстрационную программу.
  * Демонстрирует заполнение матрицы, работу задач Task1 и Task2, а также сдвиги.
  * @return Код возврата (0 при успехе).
  */
-
 int main() {
     std::size_t n = 0;
     std::size_t m = 0;
@@ -24,54 +66,21 @@ int main() {
     std::cout << "Enter n and m: ";
     std::cin >> n >> m;
 
-    const std::size_t rows = n;
-    const std::size_t cols = m;
-
-    Matrix<int> matrix(rows, cols);
+    Matrix<int> matrix(n, m);
 
     std::cout << "Pick type of filling:\n"
-        << "1 - random numbers\n"
-        << "2 - from keyboard\n"
-        << "3 - by zero\n"
-        << "4 - by const\n"
+        << static_cast<int>(FillType::Random) << " - random numbers\n"
+        << static_cast<int>(FillType::Keyboard) << " - from keyboard\n"
+        << static_cast<int>(FillType::Zero) << " - by zero\n"
+        << static_cast<int>(FillType::Constant) << " - by const\n"
         << "> ";
 
     int choice = 0;
     std::cin >> choice;
-    const int menuChoice = choice;
 
-    std::unique_ptr<Generator> generator;
+    const std::unique_ptr<Generator> generator = createGenerator(static_cast<FillType>(choice));
 
-    switch (menuChoice) {
-    case 1: {
-        int min = 0;
-        int max = 0;
-        std::cout << "Enter min and max: ";
-        std::cin >> min >> max;
-
-        const int minValue = min;
-        const int maxValue = max;
-
-        generator = std::make_unique<RandomGenerator>(minValue, maxValue);
-        break;
-    }
-    case 2:
-        generator = std::make_unique<IStreamGenerator>(std::cin);
-        break;
-    case 3:
-        generator = std::make_unique<ZeroGenerator>();
-        break;
-    case 4: {
-        int value = 0;
-        std::cout << "Enter numbers: ";
-        std::cin >> value;
-
-        const int constValue = value;
-
-        generator = std::make_unique<ConstantGenerator>(constValue);
-        break;
-    }
-    default:
+    if (!generator) {
         std::cout << "Wrong choice.\n";
         return 1;
     }
