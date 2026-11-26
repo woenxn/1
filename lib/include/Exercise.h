@@ -11,12 +11,13 @@ namespace miit::algebra {
     class Exercise {
     protected:
         Matrix<int>& matrix;
-        /// Ссылка на абстрактный Generator
+        /// Ссылка на абстрактный Generator. generate() виртуальный, поэтому при вызове
+        /// через эту ссылку выполняется реализация реального производного класса.
         Generator& generator;
 
     public:
         /**
-         * @brief Конструктор базового класса задач.
+         * @brief Конструктор базового класса задач. Заполняет матрицу с помощью генератора.
          * @param matrix Ссылка на матрицу.
          * @param generator Ссылка на генератор.
          */
@@ -25,7 +26,7 @@ namespace miit::algebra {
         virtual ~Exercise() = default;
 
         /**
-         * @brief Чисто виртуальный метод для решения задачи
+         * @brief Чисто виртуальный метод для решения задачи. Должен быть переопределен в наследниках.
          */
         virtual void solve() = 0;
 
