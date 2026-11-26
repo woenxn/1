@@ -11,8 +11,7 @@ namespace miit::algebra {
     class Exercise {
     protected:
         Matrix<int>& matrix;
-        /// Ссылка на абстрактный Generator. generate() виртуальный, поэтому при вызове
-        /// через эту ссылку выполняется реализация реального производного класса.
+        /// Ссылка на абстрактный Generator. generate() виртуальный, поэтому при вызове через эту ссылку выполняется реализация реального производного класса.
         Generator& generator;
 
     public:
