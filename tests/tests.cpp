@@ -1,4 +1,5 @@
 #include <cassert>
+#include <cstddef>
 #include <vector>
 
 #include "Matrix.h"
@@ -25,6 +26,35 @@ namespace {
 
 }
 
+bool compare(const Matrix<int>& actual, const Matrix<int>& expected);
+void testTask1();
+void testTask2();
+void testPolymorphicGenerator();
+
+int main() {
+    testTask1();
+    testTask2();
+    testPolymorphicGenerator();
+
+    return 0;
+}
+
+bool compare(const Matrix<int>& actual, const Matrix<int>& expected) {
+    if (actual.getRows() != expected.getRows() || actual.getCols() != expected.getCols()) {
+        return false;
+    }
+
+    for (std::size_t i = 0; i < actual.getRows(); ++i) {
+        for (std::size_t j = 0; j < actual.getCols(); ++j) {
+            if (actual[i][j] != expected[i][j]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
 void testTask1() {
     Matrix<int> matrix(3, 3);
     ConstantGenerator generator(0);
@@ -38,17 +68,13 @@ void testTask1() {
 
     task.solve();
 
-    assert(matrix[0][0] == 3);
-    assert(matrix[1][0] == 0);
-    assert(matrix[2][0] == 9);
+    const Matrix<int> expected({
+        { 3, 0, 0 },
+        { 0, 0, 4 },
+        { 9, 0, 0 }
+        });
 
-    assert(matrix[0][1] == 0);
-    assert(matrix[1][1] == 0);
-    assert(matrix[2][1] == 0);
-
-    assert(matrix[0][2] == 0);
-    assert(matrix[1][2] == 4);
-    assert(matrix[2][2] == 0);
+    assert(compare(matrix, expected));
 }
 
 void testTask2() {
@@ -64,9 +90,14 @@ void testTask2() {
 
     task.solve();
 
-    assert(matrix.getRows() == 4);
-    assert(matrix[3][0] == 5);
-    assert(matrix[3][1] == 6);
+    const Matrix<int> expected({
+        { 1, 2 },
+        { 3, 4 },
+        { 5, 6 },
+        { 5, 6 }
+        });
+
+    assert(compare(matrix, expected));
 }
 
 void testPolymorphicGenerator() {
@@ -75,29 +106,20 @@ void testPolymorphicGenerator() {
     Matrix<int> counter(2, 2);
     CounterGenerator counterGenerator;
     Task1 counterTask(counter, counterGenerator);
-    assert(counter[0][0] == 1 && counter[0][1] == 2);
-    assert(counter[1][0] == 3 && counter[1][1] == 4);
+    assert(compare(counter, Matrix<int>({ { 1, 2 }, { 3, 4 } })));
 
     Matrix<int> zeros(2, 2, 9);
     ZeroGenerator zeroGenerator;
     Task1 zeroTask(zeros, zeroGenerator);
-    assert(zeros[0][0] == 0 && zeros[1][1] == 0);
+    assert(compare(zeros, Matrix<int>(2, 2, 0)));
 
     Matrix<int> constant(2, 2);
     ConstantGenerator constantGenerator(7);
     Task2 constantTask(constant, constantGenerator);
-    assert(constant[0][1] == 7 && constant[1][0] == 7);
+    assert(compare(constant, Matrix<int>(2, 2, 7)));
 
     Matrix<int> random(2, 2);
     RandomGenerator randomGenerator(5, 5);
     Task1 randomTask(random, randomGenerator);
-    assert(random[0][0] == 5 && random[1][1] == 5);
-}
-
-int main() {
-    testTask1();
-    testTask2();
-    testPolymorphicGenerator();
-
-    return 0;
+    assert(compare(random, Matrix<int>(2, 2, 5)));
 }
