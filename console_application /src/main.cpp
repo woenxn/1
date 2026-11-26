@@ -22,50 +22,16 @@ namespace {
         Constant
     };
 
-    /**
-     * @brief Демонстрация работы задач и сдвигов.
-     * Матрица заполняется в конструкторе Task1 с помощью переданного генератора.
-     * @param n Количество строк.
-     * @param m Количество столбцов.
-     * @param generator Ссылка на конкретный генератор.
-     */
-    void runDemo(const std::size_t n, const std::size_t m, Generator& generator) {
-        Matrix<int> matrix(n, m);
-        Task1 task1(matrix, generator);
-
-        std::cout << "\nInitial matrix:\n";
-        std::cout << matrix.toString();
-
-        // Копии исходной матрицы для Task2 и сдвигов.
-        Matrix<int> shifted = matrix;
-
-        // Пустая матрица: конструктор Task2 ничего не запрашивает у генератора.
-        Matrix<int> matrix2;
-        Task2 task2(matrix2, generator);
-        matrix2 = matrix;
-
-        task1.solve();
-
-        std::cout << "\nTask1: min element of each column is replaced by zero:\n";
-        std::cout << matrix.toString();
-
-        task2.solve();
-
-        std::cout << "\nTask2: last row has been inserted after the rows containing the element with the max absolute value:\n";
-        std::cout << matrix2.toString();
-
-        shifted << 1;
-
-        std::cout << "\nshift left by 1:\n";
-        std::cout << shifted.toString();
-
-        shifted >> 2;
-
-        std::cout << "\nshift right by 2:\n";
-        std::cout << shifted.toString();
-    }
-
 }
+
+/**
+ * @brief Демонстрация работы задач и сдвигов.
+ * Матрица заполняется в конструкторе Task1 с помощью переданного генератора.
+ * @param n Количество строк.
+ * @param m Количество столбцов.
+ * @param generator Ссылка на конкретный генератор.
+ */
+void runDemo(const std::size_t n, const std::size_t m,const Generator& generator);
 
 /**
  * @brief Точка входа в демонстрационную программу.
@@ -124,4 +90,40 @@ int main() {
     }
 
     return 0;
+}
+
+void runDemo(const std::size_t n, const std::size_t m, Generator& generator) {
+    Matrix<int> matrix(n, m);
+    Task1 task1(matrix, generator);
+
+    std::cout << "\nInitial matrix:\n";
+    std::cout << matrix.toString();
+
+    // Копии исходной матрицы для Task2 и сдвигов.
+    Matrix<int> shifted = matrix;
+
+    // Пустая матрица: конструктор Task2 ничего не запрашивает у генератора.
+    Matrix<int> matrix2;
+    Task2 task2(matrix2, generator);
+    matrix2 = matrix;
+
+    task1.solve();
+
+    std::cout << "\nTask1: min element of each column is replaced by zero:\n";
+    std::cout << matrix.toString();
+
+    task2.solve();
+
+    std::cout << "\nTask2: last row has been inserted after the rows containing the element with the max absolute value:\n";
+    std::cout << matrix2.toString();
+
+    shifted << 1;
+
+    std::cout << "\nshift left by 1:\n";
+    std::cout << shifted.toString();
+
+    shifted >> 2;
+
+    std::cout << "\nshift right by 2:\n";
+    std::cout << shifted.toString();
 }
